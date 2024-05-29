@@ -5,7 +5,7 @@ function handleProfileSignup() {
     .then(([photoData, userData]) => {
       console.log(`${photoData.body} ${userData.firstName} ${userData.lastName}`);
     })
-    .catch(error() => {
+    .catch(() => {
       console.error('Signup system offline');
     });
 }
