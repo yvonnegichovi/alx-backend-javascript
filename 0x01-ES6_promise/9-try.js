@@ -1,5 +1,5 @@
 function quardrail(mathFunction) {
-  const queue = []
+  const queue = [];
   try {
     const result = mathFunction();
     queue.push(result);
