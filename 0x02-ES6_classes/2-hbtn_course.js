@@ -29,6 +29,7 @@ class HolbertonCourse {
     this._students = this._validateArray(newStudents, 'Students');
   }
 
+  // eslint-disable-next-line class-methods-use-this
   _validateString(value, attributeName) {
     if (typeof value !== 'string') {
       throw new TypeError(`${attributeName} must be a string`);
@@ -36,6 +37,7 @@ class HolbertonCourse {
     return value;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   _validateNumber(value, attributeName) {
     if (typeof value !== 'number' || Number.isNaN(value)) {
       throw new TypeError(`${attributeName} must be a number`);
@@ -43,6 +45,7 @@ class HolbertonCourse {
     return value;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   _validateArray(value, attributeName) {
     if (!Array.isArray(value)) {
       throw new TypeError(`${attributeName} must be an array`);
