@@ -5,7 +5,7 @@ const read1 = readline.createInterface({
   output: process.stdout
 });
 
-console.log('Welcome to Holberton School, what is your name?')
+console.log('Welcome to Holberton School, what is your name?');
 
 read1.on('line', (input) => {
   console.log(`Your name is: ${input}`);
@@ -13,5 +13,5 @@ read1.on('line', (input) => {
 });
 
 read1.on('close', () => {
-  console.log(`This important software is now closing`);
+  console.log('This important software is now closing');
 });
