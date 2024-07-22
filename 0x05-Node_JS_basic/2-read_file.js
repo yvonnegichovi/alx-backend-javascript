@@ -17,13 +17,15 @@ function countStudents(filePath) {
           students[field] = [];
         }
         students[field].push(firstName);
-        totalStudents++;
+        totalStudents = +1;
       }
     }
     console.log(`Number of students ${totalStudents}`);
     for (const field in students) {
-      const list = students[field].join(', ');
-      console.log(`Number of students in ${field}: ${students[field].length}. List: ${list}`);
+      if (Object.prototype.hasOwnProperty.call(students, field)) {
+        const list = students[field].join(', ');
+        console.log(`Number of students in ${field}: ${students[field].length}. List: ${list}`);
+      }
     }
   } catch (error) {
     throw new Error('Cannot load the database');
