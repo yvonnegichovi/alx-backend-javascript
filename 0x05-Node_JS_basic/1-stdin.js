@@ -1,17 +1,11 @@
-const readline = require('readline');
+process.stdout.write('Welcome to Holberton School, what is your name?\n');
 
-const read1 = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
+process.stdin.on('readable', () => {
+  const read1 = process.stdin.read();
+  if (read1 !== null) {
+    process.stdout.write(`Your name is: ${read1}`);
+  }
 });
-
-console.log('Welcome to Holberton School, what is your name?');
-
-read1.on('line', (input) => {
-  console.log(`Your name is: ${input}`);
-  read1.close();
-});
-
-read1.on('close', () => {
-  console.log('This important software is now closing');
+process.stdin.on('end', () => {
+  process.stdout.write('This important software is now closing');
 });

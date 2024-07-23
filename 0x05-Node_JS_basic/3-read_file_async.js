@@ -3,7 +3,7 @@ const fs = require('fs').promises;
 async function countStudents(path) {
   try {
     const data = await fs.readFile(path, 'utf8');
-    const lines = data.trim().split('\n').filter(line => line);
+    const lines = data.split('\n').filter(line => line);
     const students = {};
     let totalStudents = 0;
     for (const line of lines) {
