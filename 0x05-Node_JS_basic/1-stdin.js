@@ -6,6 +6,7 @@ process.stdin.on('readable', () => {
     process.stdout.write(`Your name is: ${read1}`);
   }
 });
+
 process.stdin.on('end', () => {
-  process.stdout.write('This important software is now closing');
+  process.stdout.write('This important software is now closing\n');
 });
