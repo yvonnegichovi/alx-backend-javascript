@@ -1,29 +1,40 @@
 const fs = require('fs').promises;
 
-async function countStudents(path) {
+/* eslint-disable consistent-return */
+async function countStudents(path, returnRes = false) {
   try {
-    const data = await fs.readFile(path, 'utf8');
-    const lines = data.split('\n').filter(line => line);
-    const students = {};
-    let totalStudents = 0;
-    for (const line of lines) {
-      const [field, firstName] = line.split(',');
-      if (!field) continue;
-      if (students[field]) {
-        students[field].push(firstName);
-      } else {
-        students[field] = [firstName];
+    const data = await fs.readFile(path, { encoding: 'utf-8' });
+
+    const strRows = data.split('\n');
+    const dataObj = {};
+
+    const actualRows = strRows.map((strRow) => strRow.split(','));
+    const dataRows = actualRows.slice(1).filter((row) => row.length === 4);
+
+    dataRows.forEach((row) => {
+      const field = row[3];
+      dataObj[field] = dataObj[field] === undefined ? [] : dataObj[field];
+
+      dataObj[field].push(row);
+    });
+
+    const retArr = [];
+    let tmpStr = `Number of students: ${dataRows.length}`;
+    if (returnRes) retArr.push(tmpStr);
+    else console.log(tmpStr);
+
+    for (const field in dataObj) {
+      if (Array.isArray(dataObj[field])) {
+        const len = dataObj[field].length;
+        const firstnames = dataObj[field].map((row) => row[0]).join(', ');
+
+        tmpStr = `Number of students in ${field}: ${len}. List: ${firstnames}`;
+        if (returnRes) retArr.push(tmpStr);
+        else console.log(tmpStr);
       }
-      totalStudents += 1;
     }
-    console.log(`Number of students: ${totalStudents}`);
-    for (const field in students) {
-      if (Object.prototype.hasOwnProperty.call(students, field)) {
-        const list = students[field].join(', ');
-        console.log(`Number of students in ${field}: ${students[field].length}. List ${list}`);
-      }
-    }
-  } catch (error) {
+    return retArr;
+  } catch (err) {
     throw new Error('Cannot load the database');
   }
 }
